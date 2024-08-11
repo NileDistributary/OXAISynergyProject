@@ -4,10 +4,11 @@ import whisper
 
     
 async def main():
-    flow = Flow.from_file('meeting_review.ai.yaml')
-    flow = flow.set_vars(audiopath='Recording (5).m4a')
+    flow = Flow.from_file('projectplanner.ai.yaml')
+    flow = flow.set_vars(audiopath='buildahouse.m4a')
     result = await flow.run()
     print(result)
+    
 
 
 if __name__ == '__main__':
