@@ -1,0 +1,29 @@
+version: "0.1"
+
+flow:
+  # Custom action to retrieve text from Whisper
+  get_transcription:
+    action: whisper
+    audiopath:
+      var: audiopath  
+  # FIRST, generate an unstructured response
+  report:
+    action: llm
+    # Use Claude-3 Opus with a temperature of 1
+    model:
+      model: anthropic.claude-3-sonnet-20240229-v1:0
+      temperature: 1
+    # Prompt the LLM to generate a meeting notes review
+    prompt:
+      
+      - heading: Project Overview Report
+        link: get_transcription.text
+      - text: |
+          You are given a set of ramblings above about different elements of a project. Your task is to organize these thoughts into a small, coherent report. The report should include the following sections:
+            1) Project Summary: A brief overview of the project based on the information provided.
+            2) Timeline Overview: An organized timeline of the tasks mentioned.(Quote all times in one uniform unit)
+            3) Sequence: Arrange the tasks mentioned into the best likely sequence based on logical order and dependencies.
+            4) Total Project Duration
+            Ensure that the report is clear, concise, and logically organized.
+
+ 
