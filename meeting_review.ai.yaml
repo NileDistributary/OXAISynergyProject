@@ -26,6 +26,7 @@ flow:
     # Use GPT-4o with a temperature of 0
     model:
       model: anthropic.claude-3-sonnet-20240229-v1:0
+      temperature: 0
     # Prompt the LLM to respond with a list
     prompt:
       - heading: Meeting Notes Review
