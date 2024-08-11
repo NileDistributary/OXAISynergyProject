@@ -6,9 +6,10 @@ import whisper
 async def main():
     flow = Flow.from_file('projectplanner.ai.yaml')
     flow = flow.set_vars(audiopath='buildahouse.m4a')
-    result = await flow.run()
+    result = await flow.run('report')
     print(result)
-    
+    jsonresult = await flow.run('structure')
+    print(jsonresult)
 
 
 if __name__ == '__main__':
