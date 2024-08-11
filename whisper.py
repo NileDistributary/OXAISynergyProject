@@ -1,12 +1,9 @@
 import os
 from openai import AzureOpenAI
-from dotenv import load_dotenv,find_dotenv
 from aijson import register_action #AI JSON Element
 
 @register_action
 def whisper(audiopath: str):
-    # load environment variables from .env file
-    load_dotenv()
 
     client = AzureOpenAI(
         api_key=os.getenv("AZURE_API_KEY"),  
