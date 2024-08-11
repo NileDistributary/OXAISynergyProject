@@ -1,22 +1,14 @@
 from aijson import Flow
 import asyncio
-
+import whisper
 
     
 async def main():
-    # load the flow
-    flow = Flow.from_file('C:/Users/niler/Desktop/OXAISynergyProject/flow.ai.yaml')
-
-    # set any variables
-    flow = flow.set_vars(thing='pizza')
-
-    # run it
+    flow = Flow.from_file('meeting_review.ai.yaml')
+    flow = flow.set_vars(audiopath='Recording (5).m4a')
     result = await flow.run()
     print(result)
 
-    # alternatively, INSTEAD of running it, stream it
-    async for result in flow.stream():
-        print(result)
 
 if __name__ == '__main__':
     asyncio.run(main())
