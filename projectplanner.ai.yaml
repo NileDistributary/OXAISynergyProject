@@ -21,9 +21,41 @@ flow:
       - text: |
           You are given a set of ramblings above about different elements of a project. Your task is to organize these thoughts into a small, coherent report. The report should include the following sections:
             1) Project Summary: A brief overview of the project based on the information provided.
-            2) Timeline Overview: An organized timeline of the tasks mentioned.(Quote all times in one uniform unit)
+            2) Timeline Overview: An organized timeline of the tasks mentioned (Use standard units of time, convert if needed).
             3) Sequence: Arrange the tasks mentioned into the best likely sequence based on logical order and dependencies.
             4) Total Project Duration
             Ensure that the report is clear, concise, and logically organized.
+  # THEN, structure the response
+  structure:
+    action: llm
+    # Prompt the LLM to respond with a list
+    model:
+      model: anthropic.claude-3-sonnet-20240229-v1:0
+      temperature: 0
+    prompt:
+      - heading: Task Organization and JSON Conversion
+        link: report
+      - text: |
+          Based on the organized report, identify the key tasks and their details. Organize these tasks into three separate arrays: one for the task names, one for the durations, and one for the order of execution.
 
- 
+    # Specify a JSONschema for structured output
+    output_schema:
+      # An example of this output is:
+      # {
+      #   "tasks": ["Task 1", "Task 2"],
+      #   "durations": ["Duration 1", "Duration 2"],
+      #   "order": [1, 2]
+      # }
+      tasks:
+        type: array
+        items:
+          type: string
+      durations:
+        type: array
+        items:
+          type: string
+      order:
+        type: array
+        items:
+          type: integer
+  
